@@ -2,8 +2,8 @@ package example;
 
 import java.util.Scanner;
 
-public class CarImpl implements Car {
-    private int speed;
+public abstract class AbstractCar implements Car {
+    protected int speed=100;
 
     public int getSpeed() {
         return speed;
@@ -11,11 +11,12 @@ public class CarImpl implements Car {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    public void Drive(int speed){
-        out("Едет со скоростью: "+speed);
+    public void getCharacteristic(){
+        out(this.getClass().getSimpleName()+" едет со скоростью: "+speed+" and Volume = "+getVolumeEngine());
     }
     private void out(String str){
         System.out.println(str);
     }
+
 
 }

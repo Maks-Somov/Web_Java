@@ -1,7 +1,8 @@
 package example;
 
 public interface Car {
-    void Drive(int speed);
+    void getCharacteristic();
     int getSpeed();
     void setSpeed(int speed);
+    double getVolumeEngine();
 }
