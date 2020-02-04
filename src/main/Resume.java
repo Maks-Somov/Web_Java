@@ -2,7 +2,7 @@ package main;
 
 import java.util.Scanner;
 
-public class Main {
+public class Resume {
 
     public static void main(String[] args) {
 	// write your code here
