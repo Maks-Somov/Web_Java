@@ -1,6 +1,4 @@
-package example;
-
-import java.util.Scanner;
+package example01;
 
 public abstract class AbstractCar implements Car {
     protected int speed=100;

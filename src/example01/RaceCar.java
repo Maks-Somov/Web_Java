@@ -1,4 +1,4 @@
-package example;
+package example01;
 
 public class RaceCar extends AbstractCar {
     RaceCar(){

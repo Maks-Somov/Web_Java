@@ -1,4 +1,4 @@
-package example;
+package example01;
 
 public class SimpleCar extends AbstractCar {
     @Override

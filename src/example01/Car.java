@@ -1,4 +1,4 @@
-package example;
+package example01;
 
 public interface Car {
     void getCharacteristic();
