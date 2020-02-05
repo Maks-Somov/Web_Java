@@ -15,5 +15,6 @@ public class Main {
         System.out.println(link.equals(link1));
         System.out.println(link.equals(link2));
         System.out.println(link);
+        System.out.println(Link.empty());
     }
 }

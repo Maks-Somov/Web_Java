@@ -7,8 +7,13 @@ import java.util.Objects;
  * 05.02.2020.
  */
 public class Link {
+    private static Link EMPTY = new Link();
     private final String name;
     private final String url;
+
+    public Link() {
+        this("", null);
+    }
 
     public Link(String name, String url) {
         this.name = name;
@@ -16,8 +21,11 @@ public class Link {
     }
 
     public Link(Link link) {
-        this.name = link.name;
-        this.url = link.url;
+        this(link.name,link.url);
+    }
+
+    public static Link empty(){
+        return EMPTY;
     }
 
     @Override
