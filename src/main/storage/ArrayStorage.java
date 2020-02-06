@@ -11,7 +11,8 @@ import java.util.Collection;
  * 06.02.2020.
  */
 public class ArrayStorage implements IStorage {
-    private Resume[] array = new Resume[100];
+    public static final int LIMIT = 100;
+    private Resume[] array = new Resume[LIMIT];
 
     @Override
     public void clear() {
@@ -20,12 +21,29 @@ public class ArrayStorage implements IStorage {
 
     @Override
     public void save(Resume r) {
-
+    /*    for (int i = 0; i <LIMIT;i++){
+            Resume resume = array[i];
+            if(resume !=null){
+                if(r.equals(resume)){
+                    throw new IllegalStateException("Already present");
+                }
+            }
+        }*/
+        for(int i=0; i<LIMIT;i++){
+            if(array[i]==null){
+                array[i]=r;
+            }
+        }
     }
 
     @Override
     public void update(Resume r) {
-
+        for(int i = 0; i<LIMIT;i++){
+            Resume resume = array[i];
+            if(r.equals(resume)){
+                array[i]=r;
+            }
+        }
     }
 
     @Override
