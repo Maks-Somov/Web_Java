@@ -2,6 +2,8 @@ package main.storage;
 
 import main.model.Resume;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -13,7 +15,7 @@ public class ArrayStorage implements IStorage {
 
     @Override
     public void clear() {
-
+        Arrays.fill(array, null);
     }
 
     @Override
@@ -33,7 +35,14 @@ public class ArrayStorage implements IStorage {
 
     @Override
     public void delete(String uuid) {
-
+        for (int i = 0; i < array.length; i++)
+        {
+            if (array[i].equals(uuid))
+            {
+                array[i] = null;
+                break;
+            }
+        }
     }
 
     @Override
