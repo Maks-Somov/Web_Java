@@ -1,6 +1,6 @@
 package main.model;
 
 public class Section {
-    private SectionType type;
+    protected SectionType type;
 
 }
