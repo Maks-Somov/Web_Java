@@ -3,26 +3,23 @@ package main.storage;
 import main.MainExeption;
 import main.model.Resume;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Maks
  * 06.02.2020.
  */
-public class ArrayStorage implements IStorage {
+public class ArrayStorage extends AbstractStorage {
     public static final int LIMIT = 100;
     private Resume[] array = new Resume[LIMIT];
     //    protected Logger LOGGER = Logger.getLogger(getClass().getName());
-    private static Logger LOGGER = Logger.getLogger(ArrayStorage.class.getName());
+//    private static Logger LOGGER = Logger.getLogger(ArrayStorage.class.getName());
     private int size=0;
 
     @Override
     public void clear() {
-        LOGGER.info("Delete all resumes.");
+        logger.info("Delete all resumes.");
         Arrays.fill(array, null);
         /*for(int i=0; i<LIMIT;i++){
             array[i]=null;
@@ -30,28 +27,28 @@ public class ArrayStorage implements IStorage {
         size = 0;
     }
 
-    @Override
+  /*  @Override
     public void save(Resume r) {
-        LOGGER.info("Save resumes with uuid"+r.getUuid());
+        logger.info("Save resumes with uuid"+r.getUuid());
         int idx = getIndex(r.getUuid());
 
 
-           /* try {
+           *//* try {
                 throw new MainExeption("Resume " + r.getUuid() + "already exist " , r);
             } catch (MainExeption mainExeption) {
                 mainExeption.printStackTrace();
             LOGGER.log(Level.SEVERE, mainExeption.getMessage(),mainExeption);
             throw new IllegalStateException(mainExeption);
-            }*/
+            }*//*
             if(idx!=-1)  throw new MainExeption("Resume " + r.getUuid() + "already exist ", r);
             array[size++]=r;
-       /* for (int i = 0; i < LIMIT; i++) {
+       *//* for (int i = 0; i < LIMIT; i++) {
             if (array[i] == null) {
                 array[i] = r;
             }
-        }*/
+        }*//*
     }
-
+*/
     @Override
     public void update(Resume r) {
         /*for (int i = 0; i < LIMIT; i++) {
@@ -60,7 +57,7 @@ public class ArrayStorage implements IStorage {
                 array[i] = r;
             }
         }*/
-        LOGGER.info("Update resumes with "+r.getUuid());
+        logger.info("Update resumes with "+r.getUuid());
         int idx = getIndex(r.getUuid());
         if(idx==-1) throw new MainExeption("Resume " + r.getUuid() + "not exist ", r);
         array[idx]=r;
@@ -68,7 +65,7 @@ public class ArrayStorage implements IStorage {
 
     @Override
     public Resume load(String uuid) {
-        LOGGER.info("Load resumes with uuid"+uuid);
+        logger.info("Load resumes with uuid"+uuid);
         int idx = getIndex(uuid);
         if(idx==-1)    throw new MainExeption("Resume " + uuid + "not exist " );
          return array[idx];
@@ -82,7 +79,7 @@ public class ArrayStorage implements IStorage {
                 break;
             }
         }*/
-        LOGGER.info("Load resumes with uuid"+uuid);
+        logger.info("Load resumes with uuid"+uuid);
         int idx = getIndex(uuid);
         if(idx==-1)
             throw new MainExeption("Resume " + uuid + "not exist " );
@@ -102,7 +99,7 @@ public class ArrayStorage implements IStorage {
     @Override
     public int size()
     {
-        LOGGER.info("Size got");
+        logger.info("Size got");
         return size;
     }
 
@@ -117,4 +114,24 @@ public class ArrayStorage implements IStorage {
         return -1;
     }
 
+    @Override
+    protected void doSave(Resume r) {
+        int idx = getIndex(r.getUuid());
+
+
+           /* try {
+                throw new MainExeption("Resume " + r.getUuid() + "already exist " , r);
+            } catch (MainExeption mainExeption) {
+                mainExeption.printStackTrace();
+            LOGGER.log(Level.SEVERE, mainExeption.getMessage(),mainExeption);
+            throw new IllegalStateException(mainExeption);
+            }*/
+        if(idx!=-1)  throw new MainExeption("Resume " + r.getUuid() + "already exist ", r);
+        array[size++]=r;
+       /* for (int i = 0; i < LIMIT; i++) {
+            if (array[i] == null) {
+                array[i] = r;
+            }
+        }*/
+    }
 }
