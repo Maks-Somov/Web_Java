@@ -18,7 +18,7 @@ public class ArrayStorage implements IStorage {
     private Resume[] array = new Resume[LIMIT];
     //    protected Logger LOGGER = Logger.getLogger(getClass().getName());
     private static Logger LOGGER = Logger.getLogger(ArrayStorage.class.getName());
-    private int size;
+    private int size=0;
 
     @Override
     public void clear() {
@@ -100,7 +100,9 @@ public class ArrayStorage implements IStorage {
     }
 
     @Override
-    public int size() {
+    public int size()
+    {
+        LOGGER.info("Size got");
         return size;
     }
 

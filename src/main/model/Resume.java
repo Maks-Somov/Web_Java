@@ -2,7 +2,7 @@ package main.model;
 
 import java.util.*;
 
-public class Resume {
+public class Resume implements Comparable<Resume> {
     private String uuid;
     private String fullName;
     private String location;
@@ -93,5 +93,10 @@ public class Resume {
 
     public void setSections(List<Section> sections) {
         this.sections = sections;
+    }
+
+    @Override
+    public int compareTo(Resume o) {
+        return fullName.compareTo(o.fullName);
     }
 }
