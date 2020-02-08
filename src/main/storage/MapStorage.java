@@ -3,6 +3,7 @@ package main.storage;
 import main.model.Resume;
 
 import java.util.Collection;
+import java.util.List;
 
 public class MapStorage extends AbstractStorage {
 
@@ -33,12 +34,17 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected Collection<Resume> doGetAllSorted() {
+    protected List<Resume> doGetAllSorted() {
         return null;
     }
 
     @Override
     protected int doSize() {
         return 0;
+    }
+
+    @Override
+    protected boolean exist(String uuid) {
+        return false;
     }
 }

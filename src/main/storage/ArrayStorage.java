@@ -70,7 +70,7 @@ public class ArrayStorage extends AbstractStorage {
 
     @Override
     protected List<Resume> doGetAllSorted() {
-        Arrays.sort(array,0,size);
+//        Arrays.sort(array,0,size);
         return Arrays.asList(Arrays.copyOf(array,size));
     }
 
