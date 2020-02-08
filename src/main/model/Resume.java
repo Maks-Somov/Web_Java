@@ -20,22 +20,32 @@ public class Resume implements Comparable<Resume> {
         this.location = location;
     }
 
+    public Resume() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Resume resume = (Resume) o;
-        return Objects.equals(uuid, resume.uuid) &&
-                Objects.equals(fullName, resume.fullName) &&
-                Objects.equals(location, resume.location) &&
-                Objects.equals(homePage, resume.homePage) &&
-                Objects.equals(contacts, resume.contacts) &&
-                Objects.equals(sections, resume.sections);
+        return uuid.equals(resume.uuid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, fullName, location, homePage, contacts, sections);
+        return uuid.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Resume{" +
+                "uuid='" + uuid + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", location='" + location + '\'' +
+                ", homePage='" + homePage + '\'' +
+                ", contacts=" + contacts +
+                ", sections=" + sections +
+                '}';
     }
 
     public void addSection(Section section){
@@ -69,10 +79,6 @@ public class Resume implements Comparable<Resume> {
 
     public List<Section> getSections() {
         return sections;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public void setFullName(String fullName) {
