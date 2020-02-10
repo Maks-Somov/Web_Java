@@ -81,9 +81,9 @@ abstract public class AbstractStorageTest  {
 //        Arrays.sort(src);
 //        assertArrayEquals(src, storage.getAllSorted().toArray());
         List<Resume> list = Arrays.asList(R1,R2,R3);
-//        Collections.sort(list, new Comparator<Resume>() {
-//            @Override
-//            public int compare(Resume o1, Resume o2) {
+        Collections.sort(list, new Comparator<Resume>() {
+            @Override
+            public int compare(Resume o1, Resume o2) {
 //                int cmp=o1.getFullName().compareTo(o2.getFullName());
 //                if(cmp!=0) return cmp;
 //                List<Contact> email = o1.getContacts();
@@ -92,9 +92,10 @@ abstract public class AbstractStorageTest  {
 //                        c.getValue();
 //                    }
 //                }
-//                return o1.compareTo()
-//            }
-//        });
+//                return o1.compareTo();
+                return 0;
+            }
+        });
         assertEquals(list,storage.getAllSorted());
 
     }
