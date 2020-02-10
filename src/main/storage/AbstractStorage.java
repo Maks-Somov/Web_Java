@@ -3,9 +3,7 @@ package main.storage;
 import main.MainExeption;
 import main.model.Resume;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 abstract public class AbstractStorage implements IStorage {
@@ -35,12 +33,25 @@ abstract public class AbstractStorage implements IStorage {
         if(!exist(uuid)) throw new MainExeption("Resume "+uuid+" not exist", uuid);
         doDelete(uuid);
     }
-    public List<Resume> getAllSorted() {
+    public Collection<Resume> getAllSorted() {
         logger.info("sorting successfull");
         List<Resume> list = doGetAllSorted();
-        Collections.sort(list);
+        Collections.sort(list, new Comparator<Resume>() {
+            @Override
+            public int compare(Resume o1, Resume o2) {
+                int cmp=o1.getFullName().compareTo(o2.getFullName());
+                if(cmp!=0) return cmp;
+                return o1.getUuid().compareTo(o2.getUuid());
+            }
+    });
+//        Collections.sort(list, (Resume o1, Resume o2) -> {
+//            int cmp=o1.getFullName().compareTo(o2.getFullName());
+//                if(cmp!=0) return cmp;
+//                return o1.getUuid().compareTo(o2.getUuid());
+//        });
         return list;
     }
+
     public int size() {
         logger.info("Size got");
         return doSize();
