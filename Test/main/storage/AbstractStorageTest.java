@@ -83,4 +83,20 @@ abstract public class AbstractStorageTest  {
     public void size() {
         assertEquals(3,storage.size());
     }
+
+    @Test(expected = MainExeption.class)
+    public void deleteMissed(){
+        storage.delete("dummy");
+    }
+
+    @Test(expected = MainExeption.class)
+    public void savePresented(){
+        storage.save(R1);
+    }
+
+    @Test(expected = MainExeption.class)
+    public void updateMissed(){
+        Resume resume = new Resume("dummy","fullName_up1", "location_up1");
+        storage.update(resume);
+    }
 }

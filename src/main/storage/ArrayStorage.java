@@ -31,8 +31,8 @@ public class ArrayStorage extends AbstractStorage {
 
     @Override
     protected void doSave(Resume r) {
-        int idx = getIndex(r.getUuid());
-        if(idx!=-1)  throw new MainExeption("Resume " + r.getUuid() + "already exist ", r);
+        /*int idx = getIndex(r.getUuid());
+        if(idx!=-1)  throw new MainExeption("Resume " + r.getUuid() + "already exist ", r);*/
         array[size++]=r;
     }
 
