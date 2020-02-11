@@ -24,11 +24,19 @@ public class Main {
         R2.addContact(ContactType.PHONE, "6385069");
         Resume R3 = new Resume("fullname3",null);
 
-
-        List<Resume> resumes = Arrays.asList(R1,R2,R3);
+        Resume r2 = new Resume(){
+            @Override
+            public String getUuid() {
+                return "Uuid_R2";
+            }
+        };
+        List<Resume> resumes = Collections.singletonList(r2);
         print(resumes);
     }
-    public static void print(List<Resume> list){
-        list.forEach(r->r.toString());
+    /*public static <T> void print(List<T> list){
+        list.forEach(r-> System.out.println(r.getClass().getSimpleName()));
+    }*/
+    public static <T extends Resume> void print(List<T> list){
+        list.forEach(r-> System.out.println(r.getUuid()));
     }
 }

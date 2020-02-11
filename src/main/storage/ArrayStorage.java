@@ -11,14 +11,17 @@ import java.util.List;
  * Maks
  * 06.02.2020.
  */
-public class ArrayStorage extends AbstractStorage {
+public class ArrayStorage extends AbstractStorage<Integer> {
     public static final int LIMIT = 100;
     private Resume[] array = new Resume[LIMIT];
     //    protected Logger LOGGER = Logger.getLogger(getClass().getName());
 //    private static Logger LOGGER = Logger.getLogger(ArrayStorage.class.getName());
     private int size=0;
 
-    private int getIndex(String uuid){
+    private int idx;
+
+    @Override
+    protected Integer getContext(String uuid){
         for (int i = 0; i<LIMIT;i++){
             if(array[i]!=null){
                 if(array[i].getUuid().equals(uuid)){
@@ -30,7 +33,12 @@ public class ArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doSave(Resume r) {
+    protected boolean exist(Integer idx) {
+        return idx!=-1;
+    }
+
+    @Override
+    protected void doSave(Integer idx, Resume r) {
         /*int idx = getIndex(r.getUuid());
         if(idx!=-1)  throw new MainExeption("Resume " + r.getUuid() + "already exist ", r);*/
         array[size++]=r;
@@ -43,24 +51,18 @@ public class ArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r) {
-        int idx = getIndex(r.getUuid());
+    protected void doUpdate(Integer idx, Resume r) {
         if(idx==-1) throw new MainExeption("Resume " + r.getUuid() + "not exist ", r);
         array[idx]=r;
     }
 
     @Override
-    protected Resume doLoad(String uuid) {
-        int idx = getIndex(uuid);
-        if(idx==-1)    throw new MainExeption("Resume " + uuid + "not exist " );
+    protected Resume doLoad(Integer idx, String uuid) {
         return array[idx];
     }
 
     @Override
-    protected void doDelete(String uuid) {
-        int idx = getIndex(uuid);
-        if(idx==-1)
-            throw new MainExeption("Resume " + uuid + "not exist " );
+    protected void doDelete(Integer idx, String uuid) {
         int numMoved = size - idx - 1;
         if (numMoved > 0)
             System.arraycopy(array, idx+1, array, idx,
@@ -79,10 +81,10 @@ public class ArrayStorage extends AbstractStorage {
         return size;
     }
 
-    @Override
-    protected boolean exist(String uuid) {
-        return getIndex(uuid)!=-1;
-    }
+//    @Override
+//    protected boolean exist(String uuid) {
+//        return getIndex(uuid);
+//    }
 }
 
 
