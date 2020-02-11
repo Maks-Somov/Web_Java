@@ -1,7 +1,6 @@
 package main.storage;
 
 import main.MainExeption;
-import main.model.Contact;
 import main.model.ContactType;
 import main.model.Resume;
 import org.junit.Assert;
@@ -120,4 +119,6 @@ abstract public class AbstractStorageTest  {
         Resume resume = new Resume("dummy","fullName_up1", "location_up1");
         storage.update(resume);
     }
+
+
 }
