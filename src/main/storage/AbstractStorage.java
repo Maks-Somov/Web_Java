@@ -3,6 +3,7 @@ package main.storage;
 import main.MainExeption;
 import main.model.Resume;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -63,9 +64,9 @@ abstract public class AbstractStorage<C> implements IStorage {
         return doSize();
     }
 
-    protected abstract void doSave(C ctx,Resume r);
+    protected abstract void doSave(C ctx,Resume r) throws IOException;
     protected abstract void doClear();
-    protected abstract void doUpdate(C ctx, Resume r);
+    protected abstract void doUpdate(C ctx, Resume r) throws IOException;
     protected abstract Resume doLoad(C ctx);
     protected abstract void doDelete(C ctx);
     protected abstract List<Resume> doGetAllSorted();
