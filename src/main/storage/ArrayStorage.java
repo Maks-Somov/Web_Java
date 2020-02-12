@@ -39,8 +39,6 @@ public class ArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doSave(Integer idx, Resume r) {
-        /*int idx = getIndex(r.getUuid());
-        if(idx!=-1)  throw new MainExeption("Resume " + r.getUuid() + "already exist ", r);*/
         array[size++]=r;
     }
 
@@ -52,17 +50,16 @@ public class ArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doUpdate(Integer idx, Resume r) {
-        if(idx==-1) throw new MainExeption("Resume " + r.getUuid() + "not exist ", r);
         array[idx]=r;
     }
 
     @Override
-    protected Resume doLoad(Integer idx, String uuid) {
+    protected Resume doLoad(Integer ctx) {
         return array[idx];
     }
 
     @Override
-    protected void doDelete(Integer idx, String uuid) {
+    protected void doDelete(Integer ctx) {
         int numMoved = size - idx - 1;
         if (numMoved > 0)
             System.arraycopy(array, idx+1, array, idx,
@@ -72,7 +69,6 @@ public class ArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     protected List<Resume> doGetAllSorted() {
-//        Arrays.sort(array,0,size);
         return Arrays.asList(Arrays.copyOf(array,size));
     }
 
@@ -80,11 +76,6 @@ public class ArrayStorage extends AbstractStorage<Integer> {
     protected int doSize() {
         return size;
     }
-
-//    @Override
-//    protected boolean exist(String uuid) {
-//        return getIndex(uuid);
-//    }
 }
 
 

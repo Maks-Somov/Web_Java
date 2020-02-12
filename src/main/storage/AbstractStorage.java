@@ -31,13 +31,13 @@ abstract public class AbstractStorage<C> implements IStorage {
         logger.info("Load resumes with uuid" + uuid);
         C ctx = getContext(uuid);
         if(!exist(ctx)) throw new MainExeption("Resume "+uuid+" not exist", uuid);
-        return doLoad(ctx, uuid);
+        return doLoad(ctx);
     }
     public void delete(String uuid) {
         logger.info("Load resumes with uuid" + uuid);
         C ctx = getContext(uuid);
         if(!exist(ctx)) throw new MainExeption("Resume "+uuid+" not exist", uuid);
-        doDelete(ctx,uuid);
+        doDelete(ctx);
     }
     public Collection<Resume> getAllSorted() {
         logger.info("sorting successfull");
@@ -66,8 +66,8 @@ abstract public class AbstractStorage<C> implements IStorage {
     protected abstract void doSave(C ctx,Resume r);
     protected abstract void doClear();
     protected abstract void doUpdate(C ctx, Resume r);
-    protected abstract Resume doLoad(C ctx, String uuid);
-    protected abstract void doDelete(C ctx, String uuid);
+    protected abstract Resume doLoad(C ctx);
+    protected abstract void doDelete(C ctx);
     protected abstract List<Resume> doGetAllSorted();
     protected abstract int doSize();
     protected abstract C getContext(String uuid);
