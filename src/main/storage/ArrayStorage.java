@@ -18,8 +18,6 @@ public class ArrayStorage extends AbstractStorage<Integer> {
 //    private static Logger LOGGER = Logger.getLogger(ArrayStorage.class.getName());
     private int size=0;
 
-    private int idx;
-
     @Override
     protected Integer getContext(String uuid){
         for (int i = 0; i<LIMIT;i++){
@@ -54,12 +52,12 @@ public class ArrayStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected Resume doLoad(Integer ctx) {
+    protected Resume doLoad(Integer idx) {
         return array[idx];
     }
 
     @Override
-    protected void doDelete(Integer ctx) {
+    protected void doDelete(Integer idx) {
         int numMoved = size - idx - 1;
         if (numMoved > 0)
             System.arraycopy(array, idx+1, array, idx,

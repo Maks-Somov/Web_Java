@@ -30,7 +30,7 @@ abstract public class AbstractStorage<C> implements IStorage {
     public Resume load(String uuid) {
         logger.info("Load resumes with uuid" + uuid);
         C ctx = getContext(uuid);
-        if(!exist(ctx)) throw new MainExeption("Resume "+uuid+" not exist", uuid);
+        if(!exist(ctx)) throw new MainExeption("Resume "+uuid+" not exist");
         return doLoad(ctx);
     }
     public void delete(String uuid) {
