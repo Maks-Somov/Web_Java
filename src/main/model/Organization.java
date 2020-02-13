@@ -1,5 +1,6 @@
 package main.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,9 @@ public class Organization {
      * Maks
      * 06.02.2020.
      */
-    public static class Period {
+    public static class Period implements Serializable {
+        static final long serialVersionUID = 1L;
+
         private Date startDate;
         private Date endDate;
         private String position;

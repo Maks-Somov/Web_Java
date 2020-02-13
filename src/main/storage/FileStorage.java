@@ -6,10 +6,7 @@ import main.model.Resume;
 import org.omg.CORBA.portable.InputStream;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FileStorage extends AbstractStorage<File> {
     private File dir;
@@ -37,6 +34,8 @@ public class FileStorage extends AbstractStorage<File> {
             dos.writeUTF(r.getFullName());
             dos.writeUTF(r.getLocation());
             dos.writeUTF(r.getHomePage());
+            Map<ContactType, String> contacts = r.getContacts();
+            dos.writeInt(contacts.size());
             for (Map.Entry<ContactType, String> entry : r.getContacts().entrySet()) {
                 dos.writeInt(entry.getKey().ordinal());
                 dos.writeUTF(entry.getValue());
@@ -54,8 +53,10 @@ public class FileStorage extends AbstractStorage<File> {
             r.setFullName(dis.readUTF());
             r.setLocation(dis.readUTF());
             r.setHomePage(dis.readUTF());
-            Map<ContactType,String> contacts = new EnumMap<>(ContactType.class);
-
+            int size = dis.readInt();
+            for (int i = 0; i<size;i++){
+                r.addContact(ContactType.VALUES[dis.readInt()],dis.readUTF());
+            }
             //TODO
         }catch (IOException e){
             throw new MainExeption( "Couldn't read file " + file.getAbsolutePath(),e);
@@ -88,9 +89,7 @@ public class FileStorage extends AbstractStorage<File> {
     @Override
     protected void doDelete(File file) {
         if (!file.delete()) {
-            throw new MainExeption("F" +
-                    "" +
-                    "ile " + file.getAbsolutePath() + " can't be deleted!");
+            throw new MainExeption("File " + file.getAbsolutePath() + " can't be deleted!");
         }
     }
 
@@ -101,7 +100,9 @@ public class FileStorage extends AbstractStorage<File> {
 
     @Override
     protected int doSize() {
-        return 0;
+        String[] list = dir.list();
+        if(list==null)    throw new MainExeption("Couldn't read directory "+dir.getAbsolutePath());
+        return list.length;
     }
 
     @Override
