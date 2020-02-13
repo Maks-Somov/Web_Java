@@ -74,7 +74,7 @@ public abstract class FileStorage extends AbstractStorage<File> {
 
     @Override
     protected File getContext(String fileName) {
-        return new File(fileName);
+        return new File(dir,fileName);
     }
 
     @Override
