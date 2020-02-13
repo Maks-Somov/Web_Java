@@ -12,7 +12,7 @@ abstract public class AbstractStorage<C> implements IStorage {
 
 
 
-    public void save(Resume r) {
+    public void save(Resume r) throws IOException {
         logger.info("Save resumes with uuid"+r.getUuid());
         C ctx = getContext(r);
         if(exist(ctx)) throw new MainExeption("Resume "+r.getUuid()+" already exist", r);
@@ -22,7 +22,7 @@ abstract public class AbstractStorage<C> implements IStorage {
         logger.info("Delete all resumes.");
         doClear();
     }
-    public void update(Resume r){
+    public void update(Resume r) throws IOException {
         logger.info("Update resumes with "+r.getUuid());
         C ctx = getContext(r);
         if(!exist(ctx)) throw new MainExeption("Resume "+r.getUuid()+" not exist", r);

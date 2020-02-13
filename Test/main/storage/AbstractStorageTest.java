@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,7 +28,7 @@ abstract public class AbstractStorageTest  {
     }
 
     @Before
-    public void Before(){
+    public void Before() throws IOException {
         R1 = new Resume("fullname1","location1");
         R1.addContact(ContactType.MAIL, "failahdux@yandex.ru");
         R1.addContact(ContactType.MOBILE, "6385069");
@@ -54,7 +55,7 @@ abstract public class AbstractStorageTest  {
     }
 
     @Test
-    public void update() {
+    public void update() throws IOException {
         R2.setFullName("UpdateName N2");
         storage.update(R2);
         assertEquals(R2, storage.load(R2.getUuid()));
@@ -110,12 +111,12 @@ abstract public class AbstractStorageTest  {
     }
 
     @Test(expected = MainExeption.class)
-    public void savePresented(){
+    public void savePresented() throws IOException {
         storage.save(R1);
     }
 
     @Test(expected = MainExeption.class)
-    public void updateMissed(){
+    public void updateMissed() throws IOException {
         Resume resume = new Resume("dummy","fullName_up1", "location_up1");
         storage.update(resume);
     }
