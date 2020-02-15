@@ -3,6 +3,8 @@ package main.storage;
 import main.MainExeption;
 import main.model.ContactType;
 import main.model.Resume;
+import main.model.Section;
+import main.model.SectionType;
 
 import java.io.*;
 import java.util.Map;
@@ -24,16 +26,23 @@ public class DataStreamFileStorage extends FileStorage {
             dos.writeInt(contacts.size());
             for (Map.Entry<ContactType, String> entry : r.getContacts().entrySet()) {
                 dos.writeInt(entry.getKey().ordinal());
-                dos.writeUTF(entry.getValue());
+                writeString(dos, entry.getValue());
             }
             //TODO section implementation
+            Map<SectionType, Section> sections = r.getSections();
+            dos.writeInt(sections.size());
+            for(Map.Entry<SectionType,Section> entry : sections.entrySet()){
+                SectionType type = entry.getKey();
+                Section section = entry.getValue();
+                writeString(dos,type.name());
+            }
         } catch (IOException e) {
             throw new MainExeption(e, r, "Couldn't write file " + file.getAbsolutePath());
         }
     }
 
     protected Resume read(File file) {
-        Resume r = new Resume();
+        Resume r = new Resume(file.getName());
         try (FileInputStream is = new FileInputStream(file); DataInputStream dis = new DataInputStream(is)) {
             r.setFullName(readString(dis));
             r.setLocation(readString(dis));
@@ -42,11 +51,11 @@ public class DataStreamFileStorage extends FileStorage {
             for (int i = 0; i < size; i++) {
                 r.addContact(ContactType.VALUES[dis.readInt()], readString(dis));
             }
-            //TODO
+
         } catch (IOException e) {
             throw new MainExeption("Couldn't read file " + file.getAbsolutePath(), e);
         }
-        return null;
+        return r;
     }
 
     private void writeString(DataOutputStream dos, String str) throws IOException {

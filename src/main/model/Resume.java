@@ -125,7 +125,14 @@ public class Resume implements Serializable {
         addSection(type, new MultiTextSection(values));
     }
 
-//    public void setSections(List<Section> sections) {
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public Resume(String uuid) {
+        this.uuid = uuid;
+    }
+    //    public void setSections(List<Section> sections) {
 //        this.sections = sections;
 //    }
     /*private String getEmail(List<Contact> list){
