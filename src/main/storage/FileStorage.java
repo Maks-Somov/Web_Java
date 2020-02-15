@@ -6,6 +6,7 @@ import main.model.Resume;
 import org.omg.CORBA.portable.InputStream;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.*;
 
 public abstract class FileStorage extends AbstractStorage<File> {
@@ -62,7 +63,11 @@ public abstract class FileStorage extends AbstractStorage<File> {
 
     @Override
     protected List<Resume> doGetAllSorted() {
-        return null;
+        File[] files = dir.listFiles();
+        if(files==null) return Collections.emptyList();
+        List<Resume> list = new ArrayList<>(files.length);
+        for(File file : files) list.add(read(file));
+        return list;
     }
 
     @Override

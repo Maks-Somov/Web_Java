@@ -5,7 +5,7 @@ import sun.invoke.empty.Empty;
 import java.io.Serializable;
 import java.util.*;
 
-public class Resume implements Serializable {// implements Comparable<Resume> {
+public class Resume implements Serializable {
     static final long serialVersionUID = 1L;
 
     private String uuid;
