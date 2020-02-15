@@ -6,7 +6,7 @@ import main.model.Resume;
  * Maks
  * 07.02.2020.
  */
-///////////Test on comp///////////////////////////
+
 public class MainExeption extends RuntimeException {
     private Resume resume = null;
     private String uuid = null;

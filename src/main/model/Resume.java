@@ -82,7 +82,7 @@ public class Resume implements Serializable {
         return contacts.get(type);
     }
 
-    public void addSections(SectionType type, Section section){
+    public void addSection(SectionType type, Section section){
         sections.put(type, section);
     }
 
@@ -116,6 +116,13 @@ public class Resume implements Serializable {
 
     public void setHomePage(String homePage) {
         this.homePage = homePage;
+    }
+
+    public void addObjective(String value){
+        addSection(SectionType.OBJECTIVE, new TextSection(value));
+    }
+    public void addMultiTextSection(SectionType type, String... values){
+        addSection(type, new MultiTextSection(values));
     }
 
 //    public void setSections(List<Section> sections) {
