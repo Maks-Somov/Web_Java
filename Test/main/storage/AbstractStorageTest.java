@@ -2,6 +2,7 @@ package main.storage;
 
 import main.MainExeption;
 import main.model.ContactType;
+import main.model.Organization;
 import main.model.Resume;
 import main.model.SectionType;
 import org.junit.Assert;
@@ -10,6 +11,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -42,6 +45,11 @@ abstract public class AbstractStorageTest  {
         R1.addMultiTextSection(SectionType.ACHIEVEMENT, "Achivement11", "Achivement12");
         R1.addMultiTextSection(SectionType.QUALIFICATIONS, "Java", "SQL");
         /* TODO add EXPERIENSE and EDUCATION */
+
+//        R1.addOrganizationSection(SectionType.EXPERIENCE, new Organization("Organization11", null,
+//                new Organization.Period(LocalDate.of(2005, Month.JANUARY,1), Organization.Period.NOW, "position1", "content1"),
+//                new Organization.Period(2001, Month.MARCH, 2005, Month.JANUARY, "position2", "content2")),
+//                new Organization("Organization12", "http://Organization12.ru"));
         storage.clear();
         storage.save(R2);
         storage.save(R1);

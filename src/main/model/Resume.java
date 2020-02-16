@@ -125,6 +125,10 @@ public class Resume implements Serializable {
         addSection(type, new MultiTextSection(values));
     }
 
+    public  void addOrganizationSection(SectionType type, Organization... organizations){
+        addSection(type, new OrganizationSection(organizations));
+    }
+
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }

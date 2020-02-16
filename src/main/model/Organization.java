@@ -1,8 +1,11 @@
 package main.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Organization {
     private Link link;
@@ -23,8 +26,10 @@ public class Organization {
     public static class Period implements Serializable {
         static final long serialVersionUID = 1L;
 
-        private Date startDate;
-        private Date endDate;
+        public static final LocalDate NOW = LocalDate.of(3000, 1, 1);
+
+        private LocalDate startDate;
+        private LocalDate endDate;
         private String position;
         private String content;
 
@@ -32,11 +37,15 @@ public class Organization {
 
         }
 
-        public Period(Date startDate, Date endDate, String position, String content) {
+        public Period(LocalDate startDate, LocalDate endDate, String position, String content) {
             this.startDate = startDate;
             this.endDate = endDate;
             this.position = position;
             this.content = content;
+        }
+
+        public Period(int startYear, Month startMonth, int endYear, Month endMonth, String position, String content) {
+            this(LocalDate.of(startYear,startMonth,1), LocalDate.of(endYear,endMonth,1), position,content);
         }
     }
 }
