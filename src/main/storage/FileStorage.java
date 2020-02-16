@@ -20,7 +20,7 @@ public abstract class FileStorage extends AbstractStorage<File> {
     }
 
     @Override
-    protected void doSave(File file, Resume r) {
+    protected void doSave(File file, Resume r) throws Exception {
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -30,9 +30,10 @@ public abstract class FileStorage extends AbstractStorage<File> {
 
     }
 
-    abstract protected void write(File file, Resume r);
+    abstract protected void write(File file, Resume r) throws IOException;
 
-    abstract protected Resume read(File file) throws Exception;
+    abstract protected Resume read(File file) throws IOException;
+
 
     @Override
     protected void doClear() {
@@ -44,12 +45,12 @@ public abstract class FileStorage extends AbstractStorage<File> {
     }
 
     @Override
-    protected void doUpdate(File file, Resume r){
+    protected void doUpdate(File file, Resume r) throws IOException {
         write(file, r);
     }
 
     @Override
-    protected Resume doLoad(File file) throws Exception {
+    protected Resume doLoad(File file) throws IOException {
         return read(file);
     }
 
@@ -62,24 +63,24 @@ public abstract class FileStorage extends AbstractStorage<File> {
     }
 
     @Override
-    protected List<Resume> doGetAllSorted() throws Exception {
+    protected List<Resume> doGetAllSorted() throws IOException {
         File[] files = dir.listFiles();
-        if(files==null) return Collections.emptyList();
+        if (files == null) return Collections.emptyList();
         List<Resume> list = new ArrayList<>(files.length);
-        for(File file : files) list.add(read(file));
+        for (File file : files) list.add(read(file));
         return list;
     }
 
     @Override
     protected int doSize() {
         String[] list = dir.list();
-        if(list==null)    throw new MainExeption("Couldn't read directory "+dir.getAbsolutePath());
+        if (list == null) throw new MainExeption("Couldn't read directory " + dir.getAbsolutePath());
         return list.length;
     }
 
     @Override
     protected File getContext(String fileName) {
-        return new File(dir,fileName);
+        return new File(dir, fileName);
     }
 
     @Override

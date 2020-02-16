@@ -20,16 +20,14 @@ public class DataStreamFileStorage extends FileStorage {
     }
 
     protected void write(File file, Resume r)  {
-        try (FileOutputStream fos = new FileOutputStream(file); DataOutputStream dos = new DataOutputStream(fos)) {
+        try (FileOutputStream fos = new FileOutputStream(file);DataOutputStream dos = new DataOutputStream(fos)) {
             writeString(dos, r.getFullName());
             writeString(dos,r.getLocation());
             writeString(dos,r.getHomePage());
             Map<ContactType, String> contacts = r.getContacts();
-
             writeCollection(dos, contacts.entrySet(), entry -> {
                 dos.writeInt(entry.getKey().ordinal());
-                writeString(dos, entry.getValue());
-
+                dos.writeUTF(entry.getValue());
             });
 
             Map<SectionType, Section> sections = r.getSections();
@@ -54,12 +52,13 @@ public class DataStreamFileStorage extends FileStorage {
             }
         } catch (Exception e) {
             throw new MainExeption(e, r, "Couldn't write file " + file.getAbsolutePath());
+
         }
     }
 
-    protected Resume read(File file) throws Exception {
-        Resume r = new Resume(file.getName());
-        try (FileInputStream is = new FileInputStream(file); DataInputStream dis = new DataInputStream(is)) {
+    protected Resume read(File file)  {
+        Resume r = new Resume();
+        try (InputStream is = new FileInputStream(file);DataInputStream dis = new DataInputStream(is)) {
             r.setFullName(readString(dis));
             r.setLocation(readString(dis));
             r.setHomePage(readString(dis));
@@ -85,11 +84,12 @@ public class DataStreamFileStorage extends FileStorage {
                     break;
                 }
             }
-            return r;
-        } catch (IOException e) {
-            throw new MainExeption("Couldn't read file " + file.getAbsolutePath(), e);
+        } catch (Exception e) {
+            throw new MainExeption(  "Couldn't read file " + file.getAbsolutePath(), e);
         }
+        return r;
     }
+
 
     private void writeString(DataOutputStream dos, String str) throws IOException {
         dos.writeUTF(str==null? NULL : str);

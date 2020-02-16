@@ -11,23 +11,25 @@ public class SerializeFileStorage extends FileStorage {
     super(path);
     }
 
-    protected void write(File file, Resume r){
+    protected void write(File file, Resume r) {
         try(FileOutputStream fos = new FileOutputStream(file); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(r);
-        } catch (IOException e) {
+                oos.writeObject(r);
+            } catch (IOException e) {
             throw new MainExeption(e, r, "Couldn't write file " + file.getAbsolutePath());
         }
     }
 
     protected Resume read(File file) {
-        Resume r = new Resume();
-        try(FileInputStream is = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(is))
+        try(InputStream is = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(is))
         {
             return (Resume) ois.readObject();
-        }catch (IOException e){
-            throw new MainExeption( "Couldn't read file " + file.getAbsolutePath(),e);
         } catch (ClassNotFoundException e) {
             throw new MainExeption( "Error read resume ",e);
+        } catch (IOException e) {
+            throw new MainExeption( "Couldn't read file " + file.getAbsolutePath(), e);
         }
     }
+
+
+
 }

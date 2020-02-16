@@ -11,8 +11,8 @@ import java.util.Collection;
  */
 public interface IStorage {
     void clear();
-    void save(Resume r) throws IOException;
-    void update(Resume r) throws IOException;
+    void save(Resume r) throws Exception;
+    void update(Resume r) throws Exception;
     Resume load(String uuid) throws Exception;
     void delete(String uuid);
     Collection<Resume> getAllSorted() throws Exception;

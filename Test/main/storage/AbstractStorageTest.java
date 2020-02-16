@@ -29,7 +29,7 @@ abstract public class AbstractStorageTest  {
     }
 
     @Before
-    public void Before() throws IOException {
+    public void Before() throws Exception {
         R1 = new Resume("fullname1","location1");
         R1.addContact(ContactType.MAIL, "failahdux@yandex.ru");
         R1.addContact(ContactType.MOBILE, "6385069");
@@ -38,24 +38,24 @@ abstract public class AbstractStorageTest  {
         R2.addContact(ContactType.SKYPE, "sandcastle");
         R2.addContact(ContactType.PHONE, "6385069");
         R3 = new Resume("fullname3",null);
+        R1.addObjective("Objective1");
+        R1.addMultiTextSection(SectionType.ACHIEVEMENT, "Achivement11", "Achivement12");
+        R1.addMultiTextSection(SectionType.QUALIFICATIONS, "Java", "SQL");
+        /* TODO add EXPERIENSE and EDUCATION */
         storage.clear();
         storage.save(R2);
         storage.save(R1);
         storage.save(R3);
-        R1.addObjective("Objective1");
-        R1.addMultiTextSection(SectionType.ACHIEVEMENT, "Achivement11", "Achivement12");
-        R1.addMultiTextSection(SectionType.QUALIFICATIONS, "Java", "SQL");
-        //TODO add EXPERIENSE and EDUCATION
     }
 
     @Test
-    public void clear() {
+    public void clear() throws Exception{
         storage.clear();
         assertEquals(0,storage.size());
     }
 
     @Test
-    public void save() {
+    public void save() throws Exception{
 
     }
 
@@ -106,22 +106,22 @@ abstract public class AbstractStorageTest  {
     }
 
     @Test
-    public void size() {
+    public void size()throws Exception {
         assertEquals(3,storage.size());
     }
 
     @Test(expected = MainExeption.class)
-    public void deleteMissed(){
+    public void deleteMissed()throws Exception{
         storage.delete("dummy");
     }
 
     @Test(expected = MainExeption.class)
-    public void savePresented() throws IOException {
+    public void savePresented() throws Exception {
         storage.save(R1);
     }
 
     @Test(expected = MainExeption.class)
-    public void updateMissed() throws IOException {
+    public void updateMissed() throws Exception {
         Resume resume = new Resume("dummy","fullName_up1", "location_up1");
         storage.update(resume);
     }
