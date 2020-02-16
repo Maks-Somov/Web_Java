@@ -32,7 +32,7 @@ public abstract class FileStorage extends AbstractStorage<File> {
 
     abstract protected void write(File file, Resume r);
 
-    abstract protected Resume read(File file);
+    abstract protected Resume read(File file) throws Exception;
 
     @Override
     protected void doClear() {
@@ -49,7 +49,7 @@ public abstract class FileStorage extends AbstractStorage<File> {
     }
 
     @Override
-    protected Resume doLoad(File file) {
+    protected Resume doLoad(File file) throws Exception {
         return read(file);
     }
 
@@ -62,7 +62,7 @@ public abstract class FileStorage extends AbstractStorage<File> {
     }
 
     @Override
-    protected List<Resume> doGetAllSorted() {
+    protected List<Resume> doGetAllSorted() throws Exception {
         File[] files = dir.listFiles();
         if(files==null) return Collections.emptyList();
         List<Resume> list = new ArrayList<>(files.length);

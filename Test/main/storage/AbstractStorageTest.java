@@ -60,28 +60,28 @@ abstract public class AbstractStorageTest  {
     }
 
     @Test
-    public void update() throws IOException {
+    public void update() throws Exception {
         R2.setFullName("UpdateName N2");
         storage.update(R2);
         assertEquals(R2, storage.load(R2.getUuid()));
     }
 
     @Test
-    public void load() {
+    public void load() throws Exception {
         assertEquals(R1, storage.load(R1.getUuid()));
         assertEquals(R2, storage.load(R2.getUuid()));
         assertEquals(R3, storage.load(R3.getUuid()));
     }
 
     @Test(expected = MainExeption.class)
-    public void delete() {
+    public void delete() throws Exception {
         storage.delete(R1.getUuid());
         Assert.assertEquals(2,storage.size());
         Assert.assertEquals(null,storage.load(R1.getUuid()));
     }
 
     @Test
-    public void getAllSorted() {
+    public void getAllSorted() throws Exception {
 //        Resume[] src = new Resume[]{R1,R2,R3};
 //        Arrays.sort(src);
 //        assertArrayEquals(src, storage.getAllSorted().toArray());

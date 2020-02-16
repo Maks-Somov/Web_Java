@@ -13,8 +13,8 @@ public interface IStorage {
     void clear();
     void save(Resume r) throws IOException;
     void update(Resume r) throws IOException;
-    Resume load(String uuid);
+    Resume load(String uuid) throws Exception;
     void delete(String uuid);
-    Collection<Resume> getAllSorted();
+    Collection<Resume> getAllSorted() throws Exception;
     int size();
 }
