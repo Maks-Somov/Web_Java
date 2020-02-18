@@ -1,11 +1,14 @@
 package main.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+@XmlAccessorType(XmlAccessType.FIELD)
 
 public class Organization {
     private Link link;
@@ -23,6 +26,8 @@ public class Organization {
      * Maks
      * 06.02.2020.
      */
+    @XmlAccessorType(XmlAccessType.FIELD)
+
     public static class Period implements Serializable {
         static final long serialVersionUID = 1L;
 
