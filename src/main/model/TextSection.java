@@ -10,6 +10,9 @@ import java.util.Objects;
 public class TextSection extends Section  {
     static final long serialVersionUID = 1L;
 
+    public TextSection() {
+    }
+
     private String value;
 
     public TextSection(String value) {
