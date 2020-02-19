@@ -1,12 +1,13 @@
 package main.model;
 
-import sun.invoke.empty.Empty;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.*;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 
 @XmlRootElement
@@ -16,8 +17,8 @@ public class Resume implements Serializable {
 
     private String uuid;
     private String fullName;
-    private String location;
-    private String homePage;
+    private String location="";
+    private String homePage="";
     private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
@@ -31,6 +32,9 @@ public class Resume implements Serializable {
     }
 
     public Resume(String uuid, String fullName, String location) {
+        Objects.requireNonNull(uuid, "uuid is null");
+        Objects.requireNonNull(fullName, "fullName is null");
+        Objects.requireNonNull(location, "location is null");
         this.uuid = uuid;
         this.fullName = fullName;
         this.location = location;

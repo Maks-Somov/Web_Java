@@ -1,13 +1,13 @@
 package main.storage;
 
 import main.MainExeption;
-import main.model.ContactType;
 import main.model.Resume;
-import org.omg.CORBA.portable.InputStream;
 
-import java.io.*;
-import java.lang.reflect.Field;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class FileStorage extends AbstractStorage<File> {
     private File dir;
@@ -22,7 +22,9 @@ public abstract class FileStorage extends AbstractStorage<File> {
     @Override
     protected void doSave(File file, Resume r) throws Exception {
         try {
-            file.createNewFile();
+            if(!file.createNewFile()){
+             throw new MainExeption("Couldn't create file ", file.getAbsolutePath());
+            }
         } catch (IOException e) {
             throw new MainExeption(e, r, "Couldn't create file " + file.getAbsolutePath());
         }

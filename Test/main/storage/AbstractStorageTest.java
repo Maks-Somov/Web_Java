@@ -2,7 +2,6 @@ package main.storage;
 
 import main.MainExeption;
 import main.model.ContactType;
-import main.model.Organization;
 import main.model.Resume;
 import main.model.SectionType;
 import org.junit.Assert;
@@ -10,15 +9,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 abstract public class AbstractStorageTest  {
@@ -37,10 +32,10 @@ abstract public class AbstractStorageTest  {
         R1.addContact(ContactType.MAIL, "failahdux@yandex.ru");
         R1.addContact(ContactType.MOBILE, "6385069");
 
-        R2 = new Resume("fullname2",null);
+        R2 = new Resume("fullname2","location2");
         R2.addContact(ContactType.SKYPE, "sandcastle");
         R2.addContact(ContactType.PHONE, "6385069");
-        R3 = new Resume("fullname3",null);
+        R3 = new Resume("fullname3","location3");
         R1.addObjective("Objective1");
         R1.addMultiTextSection(SectionType.ACHIEVEMENT, "Achivement11", "Achivement12");
         R1.addMultiTextSection(SectionType.QUALIFICATIONS, "Java", "SQL");
