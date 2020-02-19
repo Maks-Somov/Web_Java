@@ -20,6 +20,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 abstract public class AbstractStorageTest  {
+    public static final String FILE_STORAGE = "";
     private static Resume R1, R2, R3;
 
     protected IStorage storage;
