@@ -16,10 +16,10 @@ public class DataStreamFileStorage extends FileStorage {
     }
 
     protected void write(File file, Resume r) {
-        try (FileOutputStream fos = new FileOutputStream(file); DataOutputStream dos = new DataOutputStream(fos)) {
-            writeString(dos, r.getFullName());
-            writeString(dos, r.getLocation());
-            writeString(dos, r.getHomePage());
+        try (FileOutputStream fos = new FileOutputStream(file);final DataOutputStream dos = new DataOutputStream(fos)) {
+            dos.writeUTF(r.getFullName());
+            dos.writeUTF(r.getLocation());
+            dos.writeUTF(r.getHomePage());
             Map<ContactType, String> contacts = r.getContacts();
             writeCollection(dos, contacts.entrySet(), entry -> {
                 dos.writeInt(entry.getKey().ordinal());
@@ -64,7 +64,7 @@ public class DataStreamFileStorage extends FileStorage {
 
     protected Resume read(File file) {
         Resume r = new Resume();
-        try (InputStream is = new FileInputStream(file); DataInputStream dis = new DataInputStream(is)) {
+        try (InputStream is = new FileInputStream(file);final DataInputStream dis = new DataInputStream(is)) {
             r.setFullName(readString(dis));
             r.setLocation(readString(dis));
             r.setHomePage(readString(dis));

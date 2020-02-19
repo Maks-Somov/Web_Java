@@ -5,7 +5,6 @@ import main.util.XMLParser;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 public class XMLFileStorage extends FileStorage {
 
@@ -19,19 +18,17 @@ public class XMLFileStorage extends FileStorage {
 
     @Override
     protected void write(File file, Resume r) throws IOException {
-try(OutputStream os = new FileOutputStream(file); Writer w = new OutputStreamWriter(os, StandardCharsets.UTF_8))
-{
-                    xmlParser.marhall(r, w);
-}
+        try (OutputStream os = new FileOutputStream(file); Writer w = new OutputStreamWriter(os, StandardCharsets.UTF_8)) {
+            xmlParser.marhall(r, w);
+        }
     }
 
     @Override
     protected Resume read(File file) throws IOException {
-        try(InputStream is = new FileInputStream(file); Reader r = new InputStreamReader(is, StandardCharsets.UTF_8)){
+        try (InputStream is = new FileInputStream(file); Reader r = new InputStreamReader(is, StandardCharsets.UTF_8)) {
             return xmlParser.unmarshall(r);
         }
     }
-
 
 
 }

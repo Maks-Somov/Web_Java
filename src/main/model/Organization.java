@@ -1,10 +1,14 @@
 package main.model;
 
+import main.util.LocalDateAdapter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +16,7 @@ import java.util.Objects;
 
 public class Organization {
     private Link link;
+
 
     public List<Period> getPeriods() {
         return periods;
@@ -31,6 +36,10 @@ public class Organization {
         this.periods = periods;
     }
 
+    public Organization(String name, String url, Period... positions) {
+        this(new Link(name, url), Arrays.asList(positions));
+    }
+
     public Link getLink() {
         return link;
     }
@@ -40,20 +49,21 @@ public class Organization {
     }
 
 
-
     /**
      * Maks
      * 06.02.2020.
      */
     @XmlAccessorType(XmlAccessType.FIELD)
-
     public static class Period implements Serializable {
         static final long serialVersionUID = 1L;
 
         public static final LocalDate NOW = LocalDate.of(3000, 1, 1);
 
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate startDate = NOW;
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
         private LocalDate endDate;
+
         private String position;
         private String content = "";
 
@@ -93,6 +103,7 @@ public class Organization {
 
         }
 
+
         public Period(LocalDate startDate, LocalDate endDate, String position, String content) {
             this.startDate = startDate;
             this.endDate = endDate;
@@ -100,8 +111,13 @@ public class Organization {
             this.content = content;
         }
 
+
         public Period(int startYear, Month startMonth, int endYear, Month endMonth, String position, String content) {
-            this(LocalDate.of(startYear,startMonth,1), LocalDate.of(endYear,endMonth,1), position,content);
+            this(LocalDate.of(startYear, startMonth, 1), LocalDate.of(endYear, endMonth, 1), position, content);
+        }
+
+        public Period(int startYear, Month startMonth, String title, String description) {
+            this(LocalDate.of(startYear, startMonth, 1), NOW, title, description);
         }
     }
 
