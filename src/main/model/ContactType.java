@@ -10,8 +10,14 @@ public enum ContactType implements Serializable {
     PHONE("Телефон"),
     MOBILE("Мобильный"),
     HOME_PHONE("Домашний"),
-    SKYPE("Скайп"),
-    MAIL("Почта"),
+    SKYPE("Скайп"){
+        @Override
+        public String toHTML(String value){return "a href='skype:" + value + "'>" + value+"</a>";}
+    },
+    MAIL("Почта"){
+        @Override
+        public String toHTML(String value){return "a href='mailto:" + value + "'>" + value+"</a>";}
+    },
     ICQ("ICQ");
 
     static final long serialVersionUID = 1L;
@@ -24,5 +30,8 @@ public enum ContactType implements Serializable {
 
     public String getTittle() {
         return tittle;
+    }
+    public String toHTML(String value){
+        return tittle+": "+value;
     }
 }
