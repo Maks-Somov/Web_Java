@@ -1,6 +1,8 @@
 <%@ page import="main.model.ContactType" %>
 <%@ page import="main.storage.XMLFileStorage" %>
 <%@ page import="main.web.HtmlUtil" %>
+<%@ page import="main.model.Resume" %>
+<%@ page import="java.util.Collection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
@@ -33,9 +35,11 @@
                         <th>&nbsp;</th>
                         <%
 //                            request.setAttribute("resumeList", WebAppConfig.get().getStorage().getAllSorted());
-                            request.setAttribute("resumeList", new XMLFileStorage("D:\\Web_Java\\file_storage"));
+XMLFileStorage storage = new XMLFileStorage("D:\\Web_Java\\file_storage");
+Collection<Resume> resumes = storage.getAllSorted();
+                            request.setAttribute("resumeList", resumes);
                         %>
-                        <c:forEach items="${resumes}" var="resume">
+                        <c:forEach items="${resumeList}" var="resume">
                             <jsp:useBean id="resume" type="main.model.Resume"/>
                     <tr>
                         <td><a href="resume?uuid=${resume.uuid}&action=view">${resume.fullName}</a></td>
@@ -44,6 +48,20 @@
                         <td><a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/pencil.png"></a></td>
                     </tr>
                     </c:forEach>
+        <%
+            for(Resume r : resumes){
+        request.setAttribute("r", r);
+        %>
+                    <tr>
+                        <td><a href="resume?uuid=${r.uuid}&action=view">${r.fullName}</a></td>
+                        <td><%=HtmlUtil.getContact(r, ContactType.MAIL)%></td>
+                        <td><a href="resume?uuid=${r.uuid}&action=delete"><img src="img/delete.png"></a></td>
+                        <td><a href="resume?uuid=${r.uuid}&action=edit"><img src="img/pencil.png"></a></td>
+                    </tr>
+<%
+        }
+%>
+
                     </tr>
                 </table>
             </td>

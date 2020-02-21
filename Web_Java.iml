@@ -90,5 +90,14 @@
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="com.guicedee.services:javax.servlet-api:62" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="com.guicedee.services:javax.servlet.jsp:62" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/jstl-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
