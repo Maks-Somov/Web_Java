@@ -146,19 +146,7 @@ public class Resume implements Serializable {
     public Resume(String uuid) {
         this.uuid = uuid;
     }
-    //    public void setSections(List<Section> sections) {
-//        this.sections = sections;
-//    }
-    /*private String getEmail(List<Contact> list){
-        for(Contact c : list) {
-            if(c.getType()== ContactType.MAIL){
-                return c.getValue();
-            }
-        }
-        return null;
-    }*/
 
-//    @Override
     public int compareTo(Resume o) {
         return fullName.compareTo(o.fullName);
     }

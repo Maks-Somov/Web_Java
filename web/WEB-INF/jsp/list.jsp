@@ -16,9 +16,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="D://Web_java/web/css/style.css">
     <title>list resume</title>
 </head>
+<body>
 <section>
     <table>
         <tr>
@@ -33,12 +34,13 @@
                         <th>Email</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
-                        <%
-//                            request.setAttribute("resumeList", WebAppConfig.get().getStorage().getAllSorted());
-XMLFileStorage storage = new XMLFileStorage("D:\\Web_Java\\file_storage");
-Collection<Resume> resumes = storage.getAllSorted();
-                            request.setAttribute("resumeList", resumes);
-                        %>
+                        <%--                        <%--%>
+                        <%--                            request.setAttribute("resumeList", WebAppConfig.get().getStorage().getAllSorted());--%>
+                        <%--XMLFileStorage storage = new XMLFileStorage("D:\\Web_Java\\file_storage");--%>
+                        <%--Collection<Resume> resumes = storage.getAllSorted();--%>
+                        <%--                            request.setAttribute("resumeList", resumes);--%>
+                        <%--                        %>--%>
+                    </tr>
                         <c:forEach items="${resumeList}" var="resume">
                             <jsp:useBean id="resume" type="main.model.Resume"/>
                     <tr>
@@ -48,30 +50,25 @@ Collection<Resume> resumes = storage.getAllSorted();
                         <td><a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/pencil.png"></a></td>
                     </tr>
                     </c:forEach>
-        <%
-            for(Resume r : resumes){
-        request.setAttribute("r", r);
-        %>
-                    <tr>
-                        <td><a href="resume?uuid=${r.uuid}&action=view">${r.fullName}</a></td>
-                        <td><%=HtmlUtil.getContact(r, ContactType.MAIL)%></td>
-                        <td><a href="resume?uuid=${r.uuid}&action=delete"><img src="img/delete.png"></a></td>
-                        <td><a href="resume?uuid=${r.uuid}&action=edit"><img src="img/pencil.png"></a></td>
-                    </tr>
-<%
-        }
-%>
-
-                    </tr>
+                    <%--        <%--%>
+                    <%--            for(Resume r : resumes){--%>
+                    <%--        request.setAttribute("r", r);--%>
+                    <%--        %>--%>
+                    <%--                    <tr>--%>
+                    <%--                        <td><a href="resume?uuid=${r.uuid}&action=view">${r.fullName}</a></td>--%>
+                    <%--                        <td><%=HtmlUtil.getContact(r, ContactType.MAIL)%></td>--%>
+                    <%--                        <td><a href="resume?uuid=${r.uuid}&action=delete"><img src="img/delete.png"></a></td>--%>
+                    <%--                        <td><a href="resume?uuid=${r.uuid}&action=edit"><img src="img/pencil.png"></a></td>--%>
+                    <%--                    </tr>--%>
+                    <%--<%--%>
+                    <%--        }--%>
+                    <%--%>--%>
                 </table>
             </td>
         </tr>
     </table>
 
 </section>
-</section>
-
-<body>
 
 </body>
 </html>
