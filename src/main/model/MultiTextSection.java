@@ -2,7 +2,6 @@ package main.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.Objects;
  * Maks
  * 06.02.2020.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MultiTextSection extends Section {
     static final long serialVersionUID = 1L;
 

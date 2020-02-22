@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-
 public class Organization {
     private Link link;
 

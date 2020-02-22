@@ -1,5 +1,7 @@
 package main.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,6 +9,7 @@ import java.util.Objects;
  * Maks
  * 05.02.2020.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Link implements Serializable {
     static final long serialVersionUID = 1L;
 

@@ -1,12 +1,14 @@
 package main.model;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Objects;
 
 /**
  * Maks
  * 06.02.2020.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TextSection extends Section  {
     static final long serialVersionUID = 1L;
 

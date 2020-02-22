@@ -1,8 +1,11 @@
 package main.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 
 //ненужен
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Contact implements Serializable {
     static final long serialVersionUID = 1L;
 

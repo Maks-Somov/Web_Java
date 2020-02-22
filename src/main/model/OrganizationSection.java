@@ -1,5 +1,7 @@
 package main.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,10 +10,12 @@ import java.util.List;
  * Maks
  * 06.02.2020.
  */
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class OrganizationSection extends Section {
     static final long serialVersionUID = 1L;
 
+    public OrganizationSection() {
+    }
 
     public List<Organization> getValues() {
         return values;

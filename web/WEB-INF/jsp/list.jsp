@@ -32,37 +32,22 @@
                         <th>Имя</th>
                         <th>Проживание</th>
                         <th>Email</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <%--                        <%--%>
-                        <%--                            request.setAttribute("resumeList", WebAppConfig.get().getStorage().getAllSorted());--%>
-                        <%--XMLFileStorage storage = new XMLFileStorage("D:\\Web_Java\\file_storage");--%>
-                        <%--Collection<Resume> resumes = storage.getAllSorted();--%>
-                        <%--                            request.setAttribute("resumeList", resumes);--%>
-                        <%--                        %>--%>
+                        <th>&nbsp;&nbsp;</th>
+                        <th>&nbsp;&nbsp;</th>
                     </tr>
-                        <c:forEach items="${resumeList}" var="resume">
+<%
+    request.setAttribute("resumeList", new XMLFileStorage("D:\\Web_Java\\file_storage"));
+%>
+                    <c:forEach items="${resumeList}" var="resume">
                             <jsp:useBean id="resume" type="main.model.Resume"/>
                     <tr>
                         <td><a href="resume?uuid=${resume.uuid}&action=view">${resume.fullName}</a></td>
+                        <td>${resume.location}</td>
                         <td><%=HtmlUtil.getContact(resume, ContactType.MAIL)%></td>
                         <td><a href="resume?uuid=${resume.uuid}&action=delete"><img src="img/delete.png"></a></td>
                         <td><a href="resume?uuid=${resume.uuid}&action=edit"><img src="img/pencil.png"></a></td>
                     </tr>
                     </c:forEach>
-                    <%--        <%--%>
-                    <%--            for(Resume r : resumes){--%>
-                    <%--        request.setAttribute("r", r);--%>
-                    <%--        %>--%>
-                    <%--                    <tr>--%>
-                    <%--                        <td><a href="resume?uuid=${r.uuid}&action=view">${r.fullName}</a></td>--%>
-                    <%--                        <td><%=HtmlUtil.getContact(r, ContactType.MAIL)%></td>--%>
-                    <%--                        <td><a href="resume?uuid=${r.uuid}&action=delete"><img src="img/delete.png"></a></td>--%>
-                    <%--                        <td><a href="resume?uuid=${r.uuid}&action=edit"><img src="img/pencil.png"></a></td>--%>
-                    <%--                    </tr>--%>
-                    <%--<%--%>
-                    <%--        }--%>
-                    <%--%>--%>
                 </table>
             </td>
         </tr>

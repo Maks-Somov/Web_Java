@@ -12,6 +12,9 @@ import java.util.List;
 public abstract class FileStorage extends AbstractStorage<File> {
     private File dir;
 
+    public FileStorage() {
+    }
+
     public FileStorage(String path) {
         this.dir = new File(path);
         if (!dir.isDirectory() || !dir.canWrite()) {
